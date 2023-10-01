@@ -18,3 +18,10 @@ Enjoy!
 
 The Fast Fourier algorithm is fundamental to our modern lives. Derek Muller at the Veritasium YouTube channel has made a [movie](https://youtu.be/nmgFG7PUHfo?si=u0cPJpFhG6RegTgw) about the algorithm. It is great to watch to get to understand what the Fourier algorithm is about.
 
+Derek refers to another (video)[https://youtu.be/spUNpyF58BY?si=-4UGiGv8g-1QV87w] by Grant Sanderson on the 3Blue1Brown YouTube channel. That video is much more math-centric but still fun to watch.
+
+If you are new to programming C# I suggest downloading Visual Studio from Microsoft. You can download the code as a zip archive in the green button at this repository. After downloading Visual Studio, you get the necessary libraries via the Nuget interface. You need to get NAudio, FFTSharp, and ScottPlot.
+
+I have one microphone on my computer, which I select automatically in this program. If you have no microphone or more, it might not work. Initially, I had issues with the microphone being turned off. I had to enable it by right-clicking the speaker symbol in the taskbar. Select sounds. Click on the recording tab. Select the microphone and click Properties. On the levels tab and microphone array, there was a little button with a red stop sign. You can click that to turn it on. I am still trying to understand why this is there, but it prohibits NAudio from reading the microphone on my computer.
+
+Good luck!
