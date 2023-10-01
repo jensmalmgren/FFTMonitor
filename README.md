@@ -1,5 +1,5 @@
 # FFTMonitor
-A C# winform program reading the microphone, and displays a Fast Fourier frequency plot. I am using NAudio 2.0.1, ScottPlot 4.1.45, and FftSharp 2.1.0.
+A C# Winform program reads the microphone and displays a Fast Fourier frequency plot. I am using NAudio 2.0.1, ScottPlot 4.1.45, and FftSharp 2.1.0.
 
 I am going to make a sound effect visualization program, and for that, I had to have the essential elements such as:
 1. Reading the microphone data,
@@ -14,4 +14,7 @@ I spent a lot of time trying to figure out what was wrong. I updated to the late
 
 It did not help. Finally, I found it had to do with using the timer event. It kicked off amid Fourier calculations. It kicked off while buffers were still copied; it was a mess. I decided to invoke a delegate to refresh the Scott plot. From that moment, there are no more hanging Fourier calculations, stack-overflows, or anything. Just stable and doing what it was supposed to do.
 
-Enjoy.
+Enjoy!
+
+The Fast Fourier algorithm is fundamental to our modern lives. Derek Muller at the Veritasium YouTube channel has made a [movie](https://youtu.be/nmgFG7PUHfo?si=u0cPJpFhG6RegTgw) about the algorithm. It is great to watch to get to understand what the Fourier algorithm is about.
+
