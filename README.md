@@ -1,4 +1,4 @@
-# FFTMonitor
+# FFTMonitor using FFTSharp
 A C# Winform program reads the microphone and displays a Fast Fourier frequency plot. I am using NAudio 2.0.1, ScottPlot 4.1.45, and FftSharp 2.1.0.
 
 I am going to make a sound effect visualization program, and for that, I had to have the essential elements such as:
