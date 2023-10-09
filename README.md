@@ -1,20 +1,20 @@
 # FFTMonitor using FFTSharp
-This C# Winform program that reads the microphone and displays a Fast Fourier frequency plot. I am using NAudio 2.0.1, ScottPlot 4.1.45, and FftSharp 2.1.0.
+This C# Winform program reading the microphone and displays a Fast Fourier frequency plot. I am using NAudio 2.0.1, ScottPlot 4.1.45, and FftSharp 2.1.0.
 
 I am going to make a sound effect visualization program, and for that, I had to have the essential elements such as:
-1. Reading the microphone data,
-2. Transforming the waveforms of the microphone into frequencies,
+1. Reading the microphone data (reading it in 32-bit precision), 
+2. Transforming the waveforms of the microphone into frequencies (Using FFTSharp on the one hand, which in its turn makes use of System.Numerics.Complex using immutable structures so that FFTSharp is forced to allocate large amounts of data not being used for anything),
 3. Plotting the data so that I would know things were right.
 
 I found several samples on the Internet. For example, [this](https://swharden.com/csdv/audio/fft/) by Scott W Harden, but there are others. Almost all the sample code I found was making use of a timer. I was not too fond of that, but I accepted it and started playing with the source code. It did not work.
 
-The Fast Fourier data buffer got stuck, so some frequencies would _not_ die out to lower values (or zero) when the microphone was not registering input.
+The Fast Fourier data buffer got *stuck*, so some frequencies would _not_ die out to lower values (or zero) when the microphone was not registering input.
 
-I spent a lot of time trying to figure out what was wrong. I updated to the latest versions of NAudio, ScottPlot, and FftSharp.
+I spent a lot of time trying to figure out what was wrong. I updated to the latest versions of NAudio, ScottPlot, and FftSharp. I ported the entire FFTSharp to my own code, including System.Numerics.Complex. I made it mutable, no improvement. I have a faint idea about using a "Square window" and that the FFT algorithm is fed with noise data that causes transients to act up the FFT calculations.
 
-It did not help. Finally, I found it had to do with using the timer event. It kicked off amid Fourier calculations. It kicked off while buffers were still copied; it was a mess. I decided to invoke a delegate to refresh the Scott plot. From that moment, there are no more hanging Fourier calculations, stack-overflows, or anything. Just stable and doing what it was supposed to do.
+I discovered some hang situations were due to using the timer event. It kicked off amid Fourier calculations. It kicked off while buffers were still copied; it was a mess. I decided to invoke a delegate to refresh the Scott plot. From that moment, there are fewer hanging Fourier calculations and stack-overflows. Refrain from being too cheerful about this because as soon as you start programming based on this algorithm, chances are that you stress the CPU or add noise, and then, somehow, you will be sitting and watching hanging FFT graphs.
 
-Enjoy!
+After investing a substantial amount of time in FFTSharp I abandoned it for the FFT routines within NAudio itself. For that please have a look at my other repository FFTMonitor-using-NAudio.
 
 The Fast Fourier algorithm is fundamental to our modern lives. Derek Muller at the Veritasium YouTube channel has made a [movie](https://youtu.be/nmgFG7PUHfo?si=u0cPJpFhG6RegTgw) about the algorithm. It is great to watch to get to understand what the Fourier algorithm is about.
 
